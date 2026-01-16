@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Forecasting App</title>
+
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+
+      /* BACKGROUND IMAGE */
+      background-image: 
+        linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)),
+        url("https://tse4.mm.bing.net/th/id/OIP.3_k5lTji9K8DBfDkAjSGkgHaE8?pid=Api&P=0&h=180");
+
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+
+      transition: background 0.5s;
+    }
+
+    .dark-mode {
+      background-image: 
+        linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+        url("https://tse4.mm.bing.net/th/id/OIP.3_k5lTji9K8DBfDkAjSGkgHaE8?pid=Api&P=0&h=180");
+      color: white;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: 20px;
+      background-color: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      backdrop-filter: blur(6px);
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+    }
+
+    input {
+      padding: 10px;
+      width: 60%;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin: 10px 0;
+    }
+
+    button {
+      padding: 8px 16px;
+      margin: 5px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .forecast,
+    .current {
+      margin-top: 20px;
+    }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      margin: 10px;
+      border-radius: 12px;
+      display: inline-block;
+      width: 100px;
+    }
+
+    .toggle-dark {
+      float: right;
+      cursor: pointer;
+      font-size: 18px;
+      margin-top: -30px;
+      margin-right: -20px;
+    }
+
+    @media (max-width: 600px) {
+      input {
+        width: 90%;
+      }
+      .card {
+        width: 80px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <span class="toggle-dark" onclick="toggleDarkMode()">🌓</span>
+
+    <h1>Weather Forecasting App</h1>
+
+    <input type="text" id="cityInput" placeholder="Enter City Name..." />
+
+    <div>
+      <button onclick="getWeather()">Search</button>
+      <button onclick="getLocationWeather()">📍 My Location</button>
+      <button onclick="voiceSearch()">🎤 Voice</button>
+      <button onclick="clearAll()">❌ Clear</button>
+    </div>
+
+    <div class="current" id="weatherResult"></div>
+    <div class="forecast" id="forecastResult"></div>
+  </div>
+
+  <script>
+    const apiKey = "fa71c145476011944c088443dc830946";
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    function clearAll() {
+      cityInput.value = "";
+      weatherResult.innerHTML = "";
+      forecastResult.innerHTML = "";
+    }
+
+    async function getWeather(cityName = null) {
+      const city = cityName || cityInput.value.trim();
+      if (!city) return alert("Please enter a city name!");
+
+      const currentUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+      const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+
+      try {
+        const [cRes, fRes] = await Promise.all([fetch(currentUrl), fetch(forecastUrl)]);
+        if (!cRes.ok) throw new Error("City not found");
+
+        const current = await cRes.json();
+        const forecast = await fRes.json();
+
+        showCurrentWeather(current);
+        showForecast(forecast.list);
+      } catch (err) {
+        weatherResult.innerHTML = `<p>❌ ${err.message}</p>`;
+      }
+    }
+
+    function showCurrentWeather(data) {
+      weatherResult.innerHTML = `
+        <h2>${data.name}, ${data.sys.country}</h2>
+        <p><strong>${data.weather[0].main}</strong></p>
+        <p>🌡 ${data.main.temp}°C | 💧 ${data.main.humidity}%</p>
+        <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png">
+      `;
+    }
+
+    function showForecast(list) {
+      forecastResult.innerHTML = "<h3>🗓 5-Day Forecast</h3>";
+      list.filter(i => i.dt_txt.includes("12:00:00")).slice(0,5).forEach(item => {
+        forecastResult.innerHTML += `
+          <div class="card">
+            <p>${new Date(item.dt_txt).toDateString()}</p>
+            <img src="https://openweathermap.org/img/wn/${item.weather[0].icon}.png">
+            <p>${item.main.temp}°C</p>
+          </div>`;
+      });
+    }
+
+    function voiceSearch() {
+      if (!("webkitSpeechRecognition" in window)) return alert("Voice not supported");
+      const r = new webkitSpeechRecognition();
+      r.lang = "en-IN";
+      r.start();
+      r.onresult = e => getWeather(e.results[0][0].transcript);
+    }
+
+    function getLocationWeather() {
+      navigator.geolocation.getCurrentPosition(pos => {
+        const { latitude, longitude } = pos.coords;
+        getWeatherByCoords(latitude, longitude);
+      });
+    }
+
+    async function getWeatherByCoords(lat, lon) {
+      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+      const res = await fetch(url);
+      const data = await res.json();
+      showCurrentWeather(data);
+    }
+  </script>
+</body>
+</html>

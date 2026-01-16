@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipkart Clone - Online Shopping</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom styles */
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+        }
+        .carousel-item {
+            transition: transform 0.5s ease;
+        }
+        .deal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .nav-items {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Top Navigation Bar -->
+    <nav class="bg-blue-600 text-white py-2 px-4">
+        <div class="container mx-auto flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="#" class="text-2xl font-bold">Flipkart</a>
+                <span class="ml-2 text-xs italic">Clone</span>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-box relative mx-4">
+                <input type="text" placeholder="Search for products, brands and more" 
+                       class="w-full py-2 px-4 rounded-sm text-gray-800 focus:outline-none">
+                <button class="absolute right-0 top-0 h-full px-4 bg-yellow-400 text-gray-800 rounded-r-sm">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <!-- Navigation Items -->
+            <div class="nav-items flex items-center space-x-6">
+                <div class="dropdown relative">
+                    <button class="flex items-center">
+                        <span>Login</span>
+                        <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                    </button>
+                    <div class="dropdown-menu absolute hidden bg-white text-gray-800 rounded shadow-lg mt-2 right-0 w-48">
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">My Profile</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Orders</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Logout</a>
+                    </div>
+                </div>
+                <a href="#" class="whitespace-nowrap">Become a Seller</a>
+                <div class="dropdown relative">
+                    <button class="flex items-center">
+                        <span>More</span>
+                        <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                    </button>
+                    <div class="dropdown-menu absolute hidden bg-white text-gray-800 rounded shadow-lg mt-2 right-0 w-48">
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Notification Preferences</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Customer Care</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Advertise</a>
+                    </div>
+                </div>
+                <a href="#" class="flex items-center">
+                    <i class="fas fa-shopping-cart mr-1"></i>
+                    <span>Cart</span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn hidden">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Second Navigation (Categories) -->
+    <div class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-2 flex space-x-8 overflow-x-auto">
+            <a href="#" class="whitespace-nowrap">Electronics</a>
+            <a href="#" class="whitespace-nowrap">Fashion</a>
+            <a href="#" class="whitespace-nowrap">Home & Kitchen</a>
+            <a href="#" class="whitespace-nowrap">Appliances</a>
+            <a href="#" class="whitespace-nowrap">Beauty</a>
+            <a href="#" class="whitespace-nowrap">Toys</a>
+            <a href="#" class="whitespace-nowrap">Grocery</a>
+            <a href="#" class="whitespace-nowrap">Mobiles</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto mt-4 px-4">
+        <!-- Hero Banner -->
+        <div class="relative mb-6 rounded overflow-hidden">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c54334d9-4479-4a6b-8437-ece6f2b8416f.png" alt="E-commerce sale banner showing multiple products with discount offers and festive decorations" class="w-full h-auto max-h-96 object-cover">
+            <div class="absolute bottom-4 right-4">
+                <button class="bg-white text-blue-600 px-4 py-2 rounded-sm font-medium">Shop Now</button>
+            </div>
+        </div>
+
+        <!-- Deals Section -->
+        <div class="bg-white p-4 mb-6 rounded shadow-sm">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold">Deals of the Day</h2>
+                <button class="text-blue-600 font-medium">View All</button>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                <!-- Deal Card 1 -->
+                <div class="deal-card bg-white p-4 border border-gray-200 rounded cursor-pointer transition">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/565a8759-8901-4b38-87c9-9a4e64d4aa39.png" alt="Smartphone with edge-to-edge display and in-hand product image showing interface" class="w-full h-40 object-contain mb-2">
+                    <h3 class="text-sm font-medium text-gray-900 mb-1 truncate">OnePlus 10 Pro 5G</h3>
+                    <div class="flex items-center">
+                        <span class="text-sm text-green-600">30% off</span>
+                        <span class="text-xs text-gray-500 ml-1 line-through">₹66,999</span>
+                    </div>
+                    <div class="text-sm font-bold text-gray-900 mt-1">₹46,999</div>
+                </div>
+
+                <!-- Deal Card 2 -->
+                <div class="deal-card bg-white p-4 border border-gray-200 rounded cursor-pointer transition">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f0da6d01-83be-4115-8e7e-ee3625cde812.png" alt="Wireless headphones product shot on white background with close-up of controls" class="w-full h-40 object-contain mb-2">
+                    <h3 class="text-sm font-medium text-gray-900 mb-1 truncate">Sony WH-1000XM4</h3>
+                    <div class="flex items-center">
+                        <span class="text-sm text-green-600">20% off</span>
+                        <span class="text-xs text-gray-500 ml-1 line-through">₹24,990</span>
+                    </div>
+                    <div class="text-sm font-bold text-gray-900 mt-1">₹19,990</div>
+                </div>
+
+                <!-- Deal Card 3 -->
+                <div class="deal-card bg-white p-4 border border-gray-200 rounded cursor-pointer transition">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/05d11d24-aa37-4341-b29e-3b60bc396aa3.png" alt="Modern LED TV in a living room setup showing entertainment content" class="w-full h-40 object-contain mb-2">
+                    <h3 class="text-sm font-medium text-gray-900 mb-1 truncate">Samsung 55" 4K UHD</h3>
+                    <div class="flex items-center">
+                        <span class="text-sm text-green-600">40% off</span>
+                        <span class="text-xs text-gray-500 ml-1 line-through">₹79,999</span>
+                    </div>
+                    <div class="text-sm font-bold text-gray-900 mt-1">₹47,999</div>
+                </div>
+
+                <!-- Deal Card 4 -->
+                <div class="deal-card bg-white p-4 border border-gray-200 rounded cursor-pointer transition">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2b26a466-da18-43c2-9bee-06fa3d2a6711.png" alt="Smartwatch with multiple watch faces and fitness tracking features displayed" class="w-full h-40 object-contain mb-2">
+                    <h3 class="text-sm font-medium text-gray-900 mb-1 truncate">Apple Watch Series 7</h3>
+                    <div class="flex items-center">
+                        <span class="text-sm text-green-600">25% off</span>
+                        <span class="text-xs text-gray-500 ml-1 line-through">₹41,900</span>
+                    </div>
+                    <div class="text-sm font-bold text-gray-900 mt-1">₹31,425</div>
+                </div>
+
+                <!-- Deal Card 5 -->
+                <div class="deal-card bg-white p-4 border border-gray-200 rounded cursor-pointer transition">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ec6ddd74-5d94-4511-a1d9-b26ce6b75134.png" alt="Kitchen blender with juicer attachments and fresh fruits around it" class="w-full h-40 object-contain mb-2">
+                    <h3 class="text-sm font-medium text-gray-900 mb-1 truncate">Prestige Mixer Grinder</h3>
+                    <div class="flex items-center">
+                        <span class="text-sm text-green-600">50% off</span>
+                        <span class="text-xs text-gray-500 ml-1 line-through">₹3,995</span>
+                    </div>
+                    <div class="text-sm font-bold text-gray-900 mt-1">₹1,997</div>
+                </div>
+
+                <!-- Deal Card 6 -->
+                <div class="deal-card bg-white p-4 border border-gray-200 rounded cursor-pointer transition">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c63d16ca-2132-48bd-9d6b-22d220bbed95.png" alt="Men's sports shoes in multiple color variations displayed on white" class="w-full h-40 object-contain mb-2">
+                    <h3 class="text-sm font-medium text-gray-900 mb-1 truncate">Nike Running Shoes</h3>
+                    <div class="flex items-center">
+                        <span class="text-sm text-green-600">30% off</span>
+                        <span class="text-xs text-gray-500 ml-1 line-through">₹4,495</span>
+                    </div>
+                    <div class="text-sm font-bold text-gray-900 mt-1">₹3,146</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Carousel -->
+        <div class="bg-white p-4 mb-6 rounded shadow-sm">
+            <h2 class="text-xl font-semibold mb-4">Latest Mobile Phones</h2>
+            <div class="relative">
+                <div id="product-carousel" class="overflow-hidden">
+                    <div class="flex transition-transform duration-300" style="width: calc(6 * 200px);">
+                        <!-- Product Carousel Items (6 items) -->
+                        <div class="w-1/6 p-2">
+                            <div class="border border-gray-200 rounded p-3">
+                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0f69d570-9f98-4d73-b714-8c91a226f1e9.png" alt="iPhone 13 Pro with premium finish showing camera setup and display" class="w-full h-32 object-contain mb-2">
+                                <h3 class="text-sm font-medium">iPhone 13 Pro</h3>
+                                <p class="text-sm text-gray-600">From ₹1,19,900</p>
+                            </div>
+                        </div>
+                        <div class="w-1/6 p-2">
+                            <div class="border border-gray-200 rounded p-3">
+                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3fb06bf3-8e14-428d-842a-785848e9628b.png" alt="Samsung Galaxy S22 Ultra with S Pen and camera close-up" class="w-full h-32 object-contain mb-2">
+                                <h3 class="text-sm font-medium">Samsung S22 Ultra</h3>
+                                <p class="text-sm text-gray-600">From ₹1,09,999</p>
+                            </div>
+                        </div>
+                        <div class="w-1/6 p-2">
+                            <div class="border border-gray-200 rounded p-3">
+                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/803586ea-b0a1-45fe-aefe-556976ea5baa.png" alt="Google Pixel 6 Pro with unique design and camera bar feature" class="w-full h-32 object-contain mb-2">
+                                <h3 class="text-sm font-medium">Pixel 6 Pro</h3>
+                                <p class="text-sm text-gray-600">From ₹79,999</p>
+                            </div>
+                        </div>
+                        <div class="w-1/6 p-2">
+                            <div class="border border-gray-200 rounded p-3">
+                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c4270781-f499-4049-8e6e-d0377629a23c.png" alt="OnePlus 9RT with Hasselblad camera branding and alert slider" class="w-full h-32 object-contain mb-2">
+                                <h3 class="text-sm font-medium">OnePlus 9RT</h3>
+                                <p class="text-sm text-gray-600">From ₹42,999</p>
+                            </div>
+                        </div>
+                        <div class="w-1/6 p-2">
+                            <div class="border border-gray-200 rounded p-3">
+                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8d39c71e-80f7-4781-85ea-6ad067306130.png" alt="Xiaomi 11T Pro with AMOLED display and 120W charging" class="w-full h-32 object-contain mb-2">
+                                <h3 class="text-sm font-medium">Xiaomi 11T Pro</h3>
+                                <p class="text-sm text-gray-600">From ₹39,999</p>
+                            </div>
+                        </div>
+                        <div class="w-1/6 p-2">
+                            <div class="border border-gray-200 rounded p-3">
+                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fedf1075-584a-43a3-af1b-96dc2e21d099.png" alt="Vivo X70 Pro+ with gimbal stabilization camera system" class="w-full h-32 object-contain mb-2">
+                                <h3 class="text-sm font-medium">Vivo X70 Pro+</h3>
+                                <p class="text-sm text-gray-600">From ₹79,990</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="carousel-prev" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="carousel-next" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Fashion Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="bg-white p-4 rounded shadow-sm">
+                <h2 class="text-xl font-semibold mb-4">Men's Fashion</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1de8722f-e6c6-4917-9a1e-73aee8d6a47d.png" alt="Men's formal shirts in various colors neatly arranged on display" class="w-full h-32 object-cover rounded mb-2">
+                        <h3 class="text-sm font-medium">Formal Shirts</h3>
+                    </div>
+                    <div>
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/34a72a13-ed4a-4d36-a1d7-9b88539f7347.png" alt="Casual t-shirts stacked showing different graphic prints" class="w-full h-32 object-cover rounded mb-2">
+                        <h3 class="text-sm font-medium">T-Shirts</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-4 rounded shadow-sm">
+                <h2 class="text-xl font-semibold mb-4">Women's Fashion</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/cfa82235-fc7e-42a4-9bde-ca3fe5b42b17.png" alt="Women's ethnic wear mannequin display with vibrant colors and embroidery" class="w-full h-32 object-cover rounded mb-2">
+                        <h3 class="text-sm font-medium">Ethnic Wear</h3>
+                    </div>
+                    <div>
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5bc9ae58-322e-4772-baff-1109c566e1ae.png" alt="Western dresses and tops in solid and printed patterns" class="w-full h-32 object-cover rounded mb-2">
+                        <h3 class="text-sm font-medium">Western Wear</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">ABOUT</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:underline">Contact Us</a></li>
+                        <li><a href="#" class="hover:underline">About Us</a></li>
+                        <li><a href="#" class="hover:underline">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4">HELP</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:underline">Payments</a></li>
+                        <li><a href="#" class="hover:underline">Shipping</a></li>
+                        <li><a href="#" class="hover:underline">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4">POLICY</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:underline">Return Policy</a></li>
+                        <li><a href="#" class="hover:underline">Terms of Use</a></li>
+                        <li><a href="#" class="hover:underline">Security</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4">SOCIAL</h3>
+                    <div class="flex space-x-4">
+                        <a href="#"><i class="fab fa-facebook-f text-xl"></i></a>
+                        <a href="#"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#"><i class="fab fa-youtube text-xl"></i></a>
+                    </div>
+                    <div class="mt-4">
+                        <p>Mail Us:</p>
+                        <p class="text-sm">contact@flipkart-clone.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-4 border-t border-gray-700 text-center">
+                <p>© 2023 Flipkart Clone. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-items').classList.toggle('hidden');
+        });
+
+        // Carousel functionality
+        let current
